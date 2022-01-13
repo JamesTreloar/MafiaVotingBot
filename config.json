@@ -1,0 +1,7 @@
+{
+    "token":"bot token",
+    "prefix": "/",
+    "clientID" : "ID of the bot's 'account'",
+    "guildID": "ID for the server",
+    "aliveID": "ID for alive role (role that can be voted for)"
+}
