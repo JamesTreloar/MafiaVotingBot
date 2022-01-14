@@ -2,9 +2,7 @@ const fs = require("fs");
 const { endHour } = require("./gameconfg.json");
 module.exports = {
 
-    validVote: function (votee) {
-        let members = {};
-        members = this.getMembers();
+    validVote: function (votee, members) {
         let date = new Date();
         let hr = date.getHours();
         if (hr >= endHour) {
@@ -52,9 +50,7 @@ module.exports = {
         fs.writeFileSync("votes.json", JSON.stringify(votes));
     },
 
-    addVote: function (votee, voter, votes) {
-        let members = {};
-        members = this.getMembers();
+    addVote: function (votee, voter, votes, members) {
         if (votes["voted"].includes(voter)) {
             for (id in members) {
                 if (votes[id].includes(voter)) {
@@ -77,9 +73,7 @@ module.exports = {
 
     },
 
-    countVotes: function (votes) {
-        let members = {};
-        members = this.getMembers();
+    countVotes: function (votes, members) {
         let counts = {};
         for(id in members){
             let count = 0;
@@ -95,9 +89,7 @@ module.exports = {
         return counts;
     },
 
-    voteResults: function(votes,counts){
-        let members = {};
-        members = this.getMembers();
+    voteResults: function(votes,counts,members){
         let output = "";
         for(id in counts){
             output += counts[id].toString();
@@ -113,17 +105,18 @@ module.exports = {
     },
 
     recordVote: function (votee, voter) {
-        let legit = this.validVote(votee);
+        let members = {};
+        members = this.getMembers();
+        let legit = this.validVote(votee, members);
         if (!legit) {
             return "Invalid vote";
         }
-        console.log("here");
         let input = fs.readFileSync("votes.json");
         let votes = JSON.parse(input);
-        votes = this.addVote(votee, voter, votes);
-        let counts = this.countVotes(votes);
+        votes = this.addVote(votee, voter, votes, members);
+        let counts = this.countVotes(votes, members);
         let output = "";
-        output = this.voteResults(votes, counts);
+        output = this.voteResults(votes, counts, members);
         console.log(output);
         return output;
 
