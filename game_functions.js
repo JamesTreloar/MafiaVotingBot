@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { endHour } = require("./gameconfg.json");
+const { endHour } = require("./gameconfig.json");
 module.exports = {
 
     validVote: function (votee, members) {
