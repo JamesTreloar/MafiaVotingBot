@@ -26,7 +26,7 @@ module.exports = {
     getMembers: function () {
         let input = fs.readFileSync("players.json");
         let members = JSON.parse(input);
-        console.log(members);
+        //console.log(members);
         return members; //Key is id, value is nickname
     },
 
@@ -117,7 +117,7 @@ module.exports = {
         let counts = this.countVotes(votes, members);
         let output = "";
         output = this.voteResults(votes, counts, members);
-        console.log(output);
+        //console.log(output);
         return output;
 
     }
