@@ -60,7 +60,7 @@ module.exports = {
                     for (j = index; j < votes[id].length - 1; j++) {
                         votes[id][j] = votes[id][j + 1];
                     }
-                    votes[name][j] = "";
+                    votes[name].pop();
                 }
             }
         } else {
